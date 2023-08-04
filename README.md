@@ -141,57 +141,62 @@ https://github.com/pkhungurn/talking-head-anime-3-demo#download-the-models
 在Conda环境中执行以下命令  
 `python launcher.py`  
 
-## 输入输出设备  
+## I/O Device
 
 #### OBS Virtual Camera
 
-目前更推荐这个方案，UnityCapture存在未查明的性能瓶颈  
-如果你选择自己进行抠像你可以直接输出到obs，如果你需要RGBA支持则需要额外使用一个Shader  
-下载并安装StreamFX https://github.com/Xaymar/obs-StreamFX  
-下载Shader（感谢树根的协助） https://github.com/shugen002/shader/blob/master/merge%20alpha2.hlsl  
-之后，使用`--alpha_split`参数运行
+At present, this solution is recommended. UnityCapture has an unidentified performance bottleneck.
+If you choose to do the keying yourself, you can directly output to obs. If you need RGBA support, you need to use an additional Shader
+to download and install StreamFX https://github.com After downloading Shader from /Xaymar/obs-StreamFX
+(thanks to the root of the tree) https://github.com/shugen002/shader/blob/master/merge%20alpha2.hlsl , run with parameters and you will see such an output screen, The transparent channel is sent in grayscale alone, and then add a filter to the video capture device in OBS - shader - select the one you downloaded - close, so that the transparent channel will be applied back to the image on the left, you may need to manually adjust the cropping to the right Cut off the useless screen (if you can't see the shader filter, it means that StreamFX is not installed or OBS is not the latest version)
+--alpha_split
+
 ![alpha split](assets/alphasplit.png)  
-你会看到这样的输出画面，透明通道单独使用灰度方式发送了  
-之后对OBS中的视频采集设备添加滤镜-着色器-选择你下载的`merge alpha2.hlsl`-关闭   
-这样透明通道就应用回左边的图像了  
-你可能需要手动调整一下裁剪把右侧的无用画面切掉  
-(看不到着色器滤镜的话就是StreamFX没装好或者OBS不是最新版)
+
+merge alpha2.hlsl
+
 
 #### UnityCapture  
 
-如果需要使用透明通道输出，参考 https://github.com/schellingb/UnityCapture#installation 安装好UnityCapture  
-只需要正常走完Install.bat，在OBS里能看到对应的设备（Unity Video Capture）就行  
+If you need to use transparent channel output, refer to https://github.com/schellingb/UnityCapture#installation to install UnityCapture,
+you only need to finish Install.bat normally, and you can see the corresponding device (Unity Video Capture) in OBS
 
-在OBS添加完摄像头以后，还需要手动配置一次摄像头属性才能支持ARGB    
-右键属性-取消激活-分辨率类型自定义-分辨率512x512(与`--output_size`参数一致)-视频格式ARGB-激活
+After adding the camera in OBS, you need to manually configure the camera properties once to support ARGB
+right-click properties-deactivate-resolution type customization-resolution 512x512 ( --output_sizeconsistent with the parameters)-video format ARGB-activate
 
 #### iFacialMocap  
 
-https://www.ifacialmocap.com/download/  
+[https://www.ifacialmocap.com/download/  
 你大概率需要购买正式版（非广告，只是试用版不太够时长）  
 购买之前确认好自己的设备支持  
-**不需要下载PC软件**，装好iOS端的软件即可，连接信息通过参数传入Python  
+**不需要下载PC软件**，装好iOS端的软件即可，连接信息通过参数传入Python  ](https://www.ifacialmocap.com/download/
+You will most likely need to buy the official version (not an advertisement, but the trial version is not long enough).
+Before buying, confirm that your device supports it .
+You don’t need to download PC software and install the iOS software. That is, the connection information is passed to Python through parameters)
 
 #### OpenSeeFace  
 
-https://github.com/emilianavt/OpenSeeFace/releases  
-直接下载最新版本的Release包并解压  
-之后进入解压目录的Binary文件夹  
-右键编辑`run.bat`，在倒数第二行运行facetracker的命令后加上`--model 4`，切换到模型4可以wink  
-`facetracker -c %cameraNum% -F %fps% -D %dcaps% -v 3 -P 1 --discard-after 0 --scan-every 0 --no-3d-adapt 1 --max-feature-updates 900 --model 4`（仅供参考）  
-之后保存并双击`run.bat`运行，按照提示选择摄像头、分辨率、帧率，捕获正常的话可以看到输出画面  
-最后在启动器中选择OpenSeeFace输入，或添加启动参数`--osf 127.0.0.1:11573`即可接入OpenSeeFace
+https://github.com/emilianavt/OpenSeeFace/releases
+directly download the latest version of the Release package and decompress it,
+then enter the Binary folder in the decompression directory ,
+right-click to edit run.bat, run the facetracker command on the penultimate line and add it --model 4, switch to model 4 You can save after wink
+facetracker -c %cameraNum% -F %fps% -D %dcaps% -v 3 -P 1 --discard-after 0 --scan-every 0 --no-3d-adapt 1 --max-feature-updates 900 --model 4(for reference only)
+and double-click run.batto run. Follow the prompts to select the camera, resolution, and frame rate. If the capture is normal, you can see the output screen.
+Finally, select OpenSeeFace input in the launcher, or add startup parameters --osf 127.0.0.1:11573to access OpenSeeFace
 
 ## Run
 
-完全体运行命令`python main.py --output_webcam unitycapture --ifm 192.168.31.182:49983 --character test1L2 --extend_movement 1 --output_size 512x512`
+full run commandpython main.py --output_webcam unitycapture --ifm 192.168.31.182:49983 --character test1L2 --extend_movement 1 --output_size 512x512
 
 参数名 | 值类型 | 说明
+
 :---: | :---: | :---:
---character|字符串|`character`目录下的输入图像文件名，不需要带扩展名
---debug|无|打开OpenCV预览窗口输出渲染结果，如果没有任何输出配置，该参数默认生效
---input|字符串|不使用iOS面捕时，传入要使用的摄像头设备名称，默认为设备0，有ifm参数时无效
---ifm|字符串|使用iOS面捕时，传入设备的`IP:端口号`，如`192.168.31.182:49983`
---output_webcam|字符串|可用值为`obs` `unitycapture`，选择对应的输出种类，不传不输出到摄像头
---extend_movement|浮点数|使用iOS面捕返回的头部位置，对模型输出图像进一步进行移动和旋转使得上半身可动<br>传入的数值表示移动倍率（建议值为1）
---output_size|字符串|格式为`256x256`，必须是4的倍数。<br>增大它并不会让图像更清晰，但配合extend_movement会增大可动范围
+--character|	string|`character` The input image file name in the directory, no extension required
+--debug|none|Open the OpenCV preview window to output the rendering result. If there is no output configuration, this parameter takes effect by default
+--input|string|When not using iOS face capture, pass in the name of the camera device to be used, the default is device 0, and it is invalid when there is an ifm parameter
+--ifm|string|	When using iOS face capture, the incoming device IP:端口号, such as192.168.31.182:49983
+--output_webcam|string|The available value is obs unitycaptureto select the corresponding output type, no transmission or output to the camera
+--extend_movement|extend_movement	floating point number|Use the head position returned by iOS surface capture to further move and rotate the model output image to make the upper body movable.
+The value passed in represents the movement magnification (recommended value is 1)
+--output_size|string|The format is 256x256and must be a multiple of 4.
+Increasing it will not make the image clearer, but it will increase the movable range with extend_movement
