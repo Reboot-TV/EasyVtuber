@@ -1,29 +1,28 @@
 # EasyVtuber  
 
-> 用买皮的钱，再买一张3080吧！
+> Use the money to buy skins to buy another 3080!！
 
 ![OBS Record With Transparent Virtural Cam Input](assets/new_sample.gif)
 
-Fork自 https://github.com/GunwooHan/EasyVtuber  
-为解决面捕质量问题，又反向port了原版demo https://github.com/pkhungurn/talking-head-anime-2-demo 中关于ifacialmocap的ios面捕逻辑  
-并且省略了ifacialmocap pc端，通过UDP直连的方式使ios面捕刷新率达到最高60fps，解决了面捕刷新率的瓶颈  
-最后，给EasyVtuber中使用的OBS虚拟摄像头方案增加配套的Shader支持，解锁RGBA输出能力，无需绿背即可直接使用
+Fork from https://github.com/GunwooHan/EasyVtuber
+to solve the quality problem of face capture, and reverse port the original demo https://github.com/pkhungurn/talking-head-anime-2-demo about ifacialmocap ios surface capture logic
+and omit ifacialmocap pc end, through UDP direct connection to make ios surface capture refresh rate up to 60fps, which solves the bottleneck of surface capture refresh rate
+Finally, add supporting Shader to the OBS virtual camera solution used in EasyVtuber Support, unlock the RGBA output capability, you can use it directly without a green back
 
-[视频介绍和安装说明](https://www.bilibili.com/video/BV1uu411r7DR)  
+[Video introduction and installation instructions](https://www.bilibili.com/video/BV1uu411r7DR)  
 
 ## Requirements  
 
-### 硬件  
+### Hardware
+- iPhone that supports FaceID (using ifacialmocap software, which needs to be purchased, requires a stable WIFI connection) or webcam (using OpenCV)
+- NVIDIA graphics card that supports PyTorch CUDA (reference: TUF RTX3080 silent frequency 40FPS 80% occupied)
 
-- 支持FaceID的iPhone（使用ifacialmocap软件，需购买，需要稳定的WIFI连接）或网络摄像头（使用OpenCV）  
-- 支持PyTorch CUDA的NVIDIA显卡（参考：TUF RTX3080 默频 40FPS 80%占用）
-### 软件
-
-- 本方案在Windows 10上测试可用
+### Software
+This solution is available for testing on Windows 10
 - Python>=3.8
-- OBS或Unity Capture（虚拟摄像头方案）
-- Photoshop或其他图片处理软件
-- 科学上网方案，看懂英文网站和报错的能力
+- OBS or Unity Capture (virtual camera solution)
+- Photoshop or other image processing software
+- Scientific Internet access plan, the ability to understand English websites and report errors
 
 ## Installation(嵌入式Python version)  
 在bin文件夹内是一个基于Python3.10.5的Win64嵌入式版构建的轻量化运行环境  
