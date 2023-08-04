@@ -24,20 +24,25 @@ This solution is available for testing on Windows 10
 - Photoshop or other image processing software
 - Scientific Internet access plan, the ability to understand English websites and report errors
 
-## Installation(嵌入式Python version)  
-在bin文件夹内是一个基于Python3.10.5的Win64嵌入式版构建的轻量化运行环境  
-对于只是需要体验这个库的用户，推荐使用这个方式安装。  
+## Installation (embedded Python version)  
 
-### 下载ZIP并解压或者克隆本Repo  
-点击[`Download ZIP`](../../archive/master.zip) 下载并解压，或者使用git克隆该仓库到你找得到的地方。  
-完整展开venv需要大约5.5G的硬盘空间。  
+In the bin folder is a lightweight operating environment based on the Win64 embedded version of Python3.10.5
+For users who just need to experience this library, it is recommended to use this method to install.
+
+### Download the ZIP and unzip or clone this Repo
+
+Click [`Download ZIP`](../../archive/master.zip) to download and unzip, or use git to clone the repository to where you can find it.
+It takes about 5.5G of hard disk space to fully expand the venv.
+
 
 ### 下载预训练模型  
-使用00B快捷方式或者以下链接下载模型文件  
-https://github.com/pkhungurn/talking-head-anime-3-demo#download-the-models  
-从原repo中下载（this Dropbox link）的压缩文件  
-解压到`data/models`文件夹中，与`placeholder.txt`同级  
-正确的目录层级为  
+
+Use the 00B shortcut or the following link to download the model file
+https://github.com/pkhungurn/talking-head-anime-3-demo#download-the-models
+
+Download the compressed file from the original repo (this Dropbox link) and
+extract it to data/modelsfolder, the correct directory hierarchy placeholder.txtis
+
 ```
 + models
   - separable_float
@@ -46,26 +51,33 @@ https://github.com/pkhungurn/talking-head-anime-3-demo#download-the-models
   - standard_half
   - placeholder.txt
 ```
-如果不确定自己有没有解压到正确位置，可以使用`00.检查并补齐必需文件.bat`  
 
-### 构建运行环境
-运行适合你的地域的`01A.构建运行环境（默认源）.bat`或者`01B.构建运行环境（国内源）.bat`  
-这个脚本会使用pip在bin目录下安装所有需要的依赖  
-两个脚本可以互相替代，并且支持从中断的位置继续  
-如果出现网络相关报错，直接关掉控制台，调整网络，重新运行即可  
+If you are not sure whether you have decompressed to the correct location, you can use00.检查并补齐必需文件.bat
+
+
+### Build the operating environment
+
+Run the one suitable for your region 01A.构建运行环境（默认源）.bat or 01B.构建运行环境（国内源）.bat
+this script will use pip to install all required dependencies in the bin directory. The
+two scripts can replace each other and support continuing from where they were interrupted.
+If there is a network-related error, just turn off the console and adjust the network. Just run it again The output of running the script again after the full installation is complete is shown in the figure. Generally speaking, if there is no red letter in the whole installation process, it means that it is successfully completed.
+
 ![step01success](assets/01Success.png)  
+
 完全安装完成后再次运行脚本的输出如图所示。一般来说安装全程没有红字就是成功结束。  
 
-### 使用启动器测试结果
-运行`02B启动器（调试输出）.bat`  
-直接点击界面底部的`Save & Launch`
-如果看到了弹出的opencv输出窗体，则安装成功完成
+### Test results using the launcher
+
+Run 02B启动器（调试输出）.bat
+and click directly at the bottom of the interface. Save & LaunchIf you see the pop-up opencv output form, the installation is successfully completed
+
 ![img.png](assets/02success.png)
 
-### 配置输入输出设备
-在成功进行Debug输出之后，请移步之后的输入输出设备一节进行进一步配置以输出到OBS。
+### Configure input and output devices
 
-## Installation(Venv version)  
+After successful debugging output, please move to the next section of input and output devices for further configuration to output to OBS.
+
+## Installation (Venv version)  
 如果你还需要使用之前的Venv方案，请参考以下步骤  
 
 ### 下载ZIP并解压或者克隆本Repo  
